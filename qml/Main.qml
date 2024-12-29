@@ -33,4 +33,12 @@ ApplicationWindow {
 			url: "https://nordics.hitstergame.com/how-to-play"
 		}
 	}
+
+	Component {
+		id: faqPage
+		HtmlInfoPage {
+			title: qsTr("FAQ")
+			url: "https://nordics.hitstergame.com/faq"
+		}
+	}
 }
