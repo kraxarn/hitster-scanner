@@ -47,21 +47,18 @@ ApplicationWindow {
 			Layout.fillHeight: true
 		}
 
-		Button {
+		MenuButton {
 			text: qsTr("Start new game")
-			font.pointSize: 24
 			Layout.fillWidth: true
 		}
 
-		Button {
+		MenuButton {
 			text: qsTr("How to play")
-			font.pointSize: 24
 			Layout.fillWidth: true
 		}
 
-		Button {
+		MenuButton {
 			text: qsTr("FAQ")
-			font.pointSize: 24
 			Layout.fillWidth: true
 		}
 
