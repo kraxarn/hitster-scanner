@@ -57,11 +57,13 @@ ApplicationWindow {
 		MenuButton {
 			text: qsTr("How to play")
 			Layout.fillWidth: true
+			onClicked: Qt.openUrlExternally("https://nordics.hitstergame.com/how-to-play")
 		}
 
 		MenuButton {
 			text: qsTr("FAQ")
 			Layout.fillWidth: true
+			onClicked: Qt.openUrlExternally("https://nordics.hitstergame.com/faq")
 		}
 
 		Item {
