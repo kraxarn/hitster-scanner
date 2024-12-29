@@ -4,7 +4,7 @@ project(hitster VERSION 0.0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.7 REQUIRED COMPONENTS Core Quick QuickControls2 LinguistTools)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Core Gui Quick QuickControls2 LinguistTools)
 
 qt_standard_project_setup(
 	REQUIRES 6.7
@@ -17,12 +17,13 @@ add_subdirectory(src)
 include(QmlModule.cmake)
 
 qt_add_translations(${PROJECT_NAME}
-	TS_FILE_DIR  ts
+	TS_FILE_DIR ts
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
 	"${CMAKE_CURRENT_SOURCE_DIR}/src"
 	# QML requires headers in root
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/qml"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE APP_NAME="${PROJECT_NAME}")
@@ -39,6 +40,7 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Core
+	Qt6::Gui
 	Qt6::Quick
 	Qt6::QuickControls2
 )

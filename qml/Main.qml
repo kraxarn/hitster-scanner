@@ -10,8 +10,8 @@ ApplicationWindow {
 	height: 960
 
 	Material.theme: Material.Dark
-	Material.primary: "#000000"
-	Material.background: "#000000"
+	Material.primary: Material.color(Material.Grey, Material.Shade900)
+	Material.background: Material.color(Material.Grey, Material.ShadeA700)
 	Material.accent: "#f9ccdb"
 
 	StackView {

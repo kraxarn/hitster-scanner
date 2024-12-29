@@ -3,6 +3,16 @@
 #include <QFontDatabase>
 #include <QQmlContext>
 
+#include "qml/howtoplay.hpp"
+
+namespace
+{
+	void defineTypes()
+	{
+		qmlRegisterType<HowToPlay>("HowToPlay", 1, 0, "HowToPlay");
+	}
+}
+
 auto main(int argc, char *argv[]) -> int
 {
 	QCoreApplication::setApplicationName(QStringLiteral(APP_NAME));
@@ -18,6 +28,7 @@ auto main(int argc, char *argv[]) -> int
 	QGuiApplication::setFont(QFont(QStringLiteral("Brown")));
 
 	QQmlApplicationEngine engine;
+	defineTypes();
 
 	QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
 		&app, [] { QCoreApplication::exit(-1); },
