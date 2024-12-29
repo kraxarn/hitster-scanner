@@ -38,6 +38,8 @@ ApplicationWindow {
 
 			Label {
 				text: qsTr("Hitster")
+				style: Text.Raised
+				styleColor: Material.accent
 				font.bold: true
 				font.pointSize: 54
 			}
