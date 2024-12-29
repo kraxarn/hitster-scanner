@@ -9,6 +9,7 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/Main.qml
 	qml/Icon.qml
 	qml/MenuButton.qml
+	qml/HomePage.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf
