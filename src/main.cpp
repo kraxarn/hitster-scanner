@@ -3,13 +3,13 @@
 #include <QFontDatabase>
 #include <QQmlContext>
 
-#include "qml/howtoplay.hpp"
+#include "qml/htmlinfo.hpp"
 
 namespace
 {
 	void defineTypes()
 	{
-		qmlRegisterType<HowToPlay>("HowToPlay", 1, 0, "HowToPlay");
+		qmlRegisterType<HtmlInfo>("HtmlInfo", 1, 0, "HtmlInfo");
 	}
 }
 

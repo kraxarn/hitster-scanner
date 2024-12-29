@@ -2,7 +2,8 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
-import HowToPlay
+
+import HtmlInfo
 
 ColumnLayout {
 	id: page
@@ -37,14 +38,15 @@ ColumnLayout {
 		}
 	}
 
-	HowToPlay {
-		id: howToPlay
+	HtmlInfo {
+		id: info
+		url: page.url
 	}
 
 	BusyIndicator {
 		Layout.fillHeight: true
 		Layout.alignment: Qt.AlignHCenter
-		visible: !howToPlay.content
+		visible: !info.content
 	}
 
 	ScrollView {
@@ -52,8 +54,8 @@ ColumnLayout {
 		Layout.fillHeight: true
 
 		Label {
-			text: howToPlay.content
-			visible: !!howToPlay.content
+			text: info.content
+			visible: !!info.content
 			textFormat: Text.StyledText
 		}
 	}

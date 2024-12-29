@@ -1,34 +1,34 @@
-#include "qml/howtoplay.hpp"
+#include "qml/htmlinfo.hpp"
 
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QTextDocument>
 
-HowToPlay::HowToPlay(QObject *parent)
+HtmlInfo::HtmlInfo(QObject *parent)
 	: QObject(parent),
 	http(new QNetworkAccessManager(this))
 {
 }
 
-auto HowToPlay::getContent() -> const QString &
+auto HtmlInfo::getContent() -> const QString &
 {
-	if (!content.isNull() || reply != nullptr)
+	if (!url.isValid() || !content.isNull() || reply != nullptr)
 	{
 		return content;
 	}
 
 	QNetworkRequest request;
-	request.setUrl(QStringLiteral("https://nordics.hitstergame.com/how-to-play"));
+	request.setUrl(url);
 
 	reply = http->get(request);
 
 	connect(reply, &QNetworkReply::finished,
-		this, &HowToPlay::onReplyFinished);
+		this, &HtmlInfo::onReplyFinished);
 
 	return content;
 }
 
-void HowToPlay::onReplyFinished()
+void HtmlInfo::onReplyFinished()
 {
 	const auto body = reply->readAll();
 
@@ -39,4 +39,15 @@ void HowToPlay::onReplyFinished()
 
 	reply->deleteLater();
 	reply = nullptr;
+}
+
+auto HtmlInfo::getUrl() -> const QUrl &
+{
+	return url;
+}
+
+void HtmlInfo::setUrl(const QUrl &url)
+{
+	this->url = url;
+	Q_UNUSED(getContent());
 }
