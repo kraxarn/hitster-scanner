@@ -45,7 +45,7 @@ ColumnLayout {
 	MenuButton {
 		text: qsTr("How to play")
 		Layout.fillWidth: true
-		onClicked: Qt.openUrlExternally("https://nordics.hitstergame.com/how-to-play")
+		onClicked: stack.push(howToPlayPage)
 	}
 
 	MenuButton {

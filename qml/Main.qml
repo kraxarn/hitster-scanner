@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Controls.Material
 
 ApplicationWindow {
@@ -14,12 +15,20 @@ ApplicationWindow {
 	Material.accent: "#f9ccdb"
 
 	StackView {
-		anchors.fill: parent
 		id: stack
+		anchors.fill: parent
 		initialItem: homePage
 	}
 
-	HomePage {
+	Component {
 		id: homePage
+		HomePage {
+		}
+	}
+
+	Component {
+		id: howToPlayPage
+		HowToPlayPage {
+		}
 	}
 }
