@@ -17,4 +17,5 @@ qt_add_qml_module(${PROJECT_NAME}
 	res/font/light.ttf
 	res/icon/speaker.svg
 	res/icon/chevron-left.svg
+	res/icon/web.svg
 )

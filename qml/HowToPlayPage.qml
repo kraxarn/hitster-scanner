@@ -24,6 +24,12 @@ ColumnLayout {
 				font.pointSize: 24
 				Layout.fillWidth: true
 			}
+
+			ToolButton {
+				icon.source: "qrc:/res/icon/web.svg"
+				Layout.alignment: Qt.AlignVCenter
+				onClicked: Qt.openUrlExternally("https://nordics.hitstergame.com/how-to-play")
+			}
 		}
 	}
 
