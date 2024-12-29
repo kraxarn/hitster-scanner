@@ -28,7 +28,9 @@ ApplicationWindow {
 
 	Component {
 		id: howToPlayPage
-		HowToPlayPage {
+		HtmlInfoPage {
+			title: qsTr("How to play")
+			url: "https://nordics.hitstergame.com/how-to-play"
 		}
 	}
 }

@@ -5,7 +5,11 @@ import QtQuick.Controls.Material
 import HowToPlay
 
 ColumnLayout {
+	id: page
 	anchors.fill: parent
+
+	property string title
+	property url url
 
 	ToolBar {
 		Layout.fillWidth: true
@@ -20,7 +24,7 @@ ColumnLayout {
 			}
 
 			Label {
-				text: qsTr("How to play")
+				text: page.title
 				font.pointSize: 24
 				Layout.fillWidth: true
 			}
@@ -28,7 +32,7 @@ ColumnLayout {
 			ToolButton {
 				icon.source: "qrc:/res/icon/web.svg"
 				Layout.alignment: Qt.AlignVCenter
-				onClicked: Qt.openUrlExternally("https://nordics.hitstergame.com/how-to-play")
+				onClicked: Qt.openUrlExternally(page.url)
 			}
 		}
 	}

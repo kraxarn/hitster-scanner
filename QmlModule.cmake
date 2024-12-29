@@ -10,7 +10,7 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/Icon.qml
 	qml/MenuButton.qml
 	qml/HomePage.qml
-	qml/HowToPlayPage.qml
+	qml/HtmlInfoPage.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf
