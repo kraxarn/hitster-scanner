@@ -4,7 +4,7 @@ project(hitster VERSION 0.0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.7 REQUIRED COMPONENTS Core Gui Quick QuickControls2 LinguistTools)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Core Gui Quick QuickControls2 LinguistTools Multimedia)
 
 qt_standard_project_setup(
 	REQUIRES 6.7
@@ -37,6 +37,7 @@ endif ()
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	WIN32_EXECUTABLE TRUE
 	MACOSX_BUNDLE TRUE
+	MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/res/app/Info.plist"
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
@@ -44,4 +45,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Gui
 	Qt6::Quick
 	Qt6::QuickControls2
+	Qt6::Multimedia
 )

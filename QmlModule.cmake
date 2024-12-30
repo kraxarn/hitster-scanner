@@ -11,6 +11,7 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/MenuButton.qml
 	qml/HomePage.qml
 	qml/HtmlInfoPage.qml
+	qml/ScanPage.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf
@@ -18,4 +19,6 @@ qt_add_qml_module(${PROJECT_NAME}
 	res/icon/speaker.svg
 	res/icon/chevron-left.svg
 	res/icon/web.svg
+	res/icon/flash.svg
+	res/icon/flash-off.svg
 )

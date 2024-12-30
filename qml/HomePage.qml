@@ -3,6 +3,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
+import PermissionManager
+
 ColumnLayout {
 	spacing: 16
 
@@ -37,9 +39,20 @@ ColumnLayout {
 		Layout.fillHeight: true
 	}
 
+	PermissionManager {
+		id: permissions
+	}
+
 	MenuButton {
 		text: qsTr("Start new game")
 		Layout.fillWidth: true
+		onClicked: {
+			if (permissions.granted) {
+				stack.push(scanPage)
+			} else {
+				permissions.request()
+			}
+		}
 	}
 
 	MenuButton {

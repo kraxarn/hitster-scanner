@@ -4,12 +4,14 @@
 #include <QQmlContext>
 
 #include "qml/htmlinfo.hpp"
+#include "qml/permissionmanager.hpp"
 
 namespace
 {
 	void defineTypes()
 	{
 		qmlRegisterType<HtmlInfo>("HtmlInfo", 1, 0, "HtmlInfo");
+		qmlRegisterType<PermissionManager>("PermissionManager", 1, 0, "PermissionManager");
 	}
 }
 

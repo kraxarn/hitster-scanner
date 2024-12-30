@@ -27,6 +27,12 @@ ApplicationWindow {
 	}
 
 	Component {
+		id: scanPage
+		ScanPage {
+		}
+	}
+
+	Component {
 		id: howToPlayPage
 		HtmlInfoPage {
 			title: qsTr("How to play")
