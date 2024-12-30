@@ -34,7 +34,7 @@ auto main(int argc, char *argv[]) -> int
 		&app, [] { QCoreApplication::exit(-1); },
 		Qt::QueuedConnection);
 
-	engine.loadFromModule(QStringLiteral("%1_app").arg(QStringLiteral(APP_NAME)), "Main");
+	engine.load(QStringLiteral(":/qml/Main.qml"));
 
 	return QGuiApplication::exec();
 }

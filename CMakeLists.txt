@@ -36,6 +36,7 @@ endif ()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	WIN32_EXECUTABLE TRUE
+	MACOSX_BUNDLE TRUE
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
