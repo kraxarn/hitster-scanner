@@ -34,6 +34,9 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	target_compile_definitions(${PROJECT_NAME} PRIVATE QT_QML_DEBUG)
 endif ()
 
+include(deps/zxing.cmake)
+target_link_libraries(${PROJECT_NAME} PRIVATE ZXing)
+
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	WIN32_EXECUTABLE TRUE
 	MACOSX_BUNDLE TRUE
