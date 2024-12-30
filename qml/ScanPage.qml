@@ -4,6 +4,8 @@ import QtQuick.Layouts
 import QtQuick.Controls.Material
 import QtMultimedia
 
+import QrCodeScanner
+
 ColumnLayout {
 	ToolBar {
 		Layout.fillWidth: true
@@ -43,6 +45,18 @@ ColumnLayout {
 				id: camera
 				active: true
 			}
+		}
+
+		QrCodeScanner {
+			id: scanner
+			sink: viewfinder.videoSink
+		}
+
+		Timer {
+			interval: 100
+			running: true
+			repeat: true
+			onTriggered: scanner.scan()
 		}
 	}
 

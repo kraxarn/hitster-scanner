@@ -5,6 +5,7 @@
 
 #include "qml/htmlinfo.hpp"
 #include "qml/permissionmanager.hpp"
+#include "qml/qrcodescanner.hpp"
 
 namespace
 {
@@ -12,6 +13,7 @@ namespace
 	{
 		qmlRegisterType<HtmlInfo>("HtmlInfo", 1, 0, "HtmlInfo");
 		qmlRegisterType<PermissionManager>("PermissionManager", 1, 0, "PermissionManager");
+		qmlRegisterType<QrCodeScanner>("QrCodeScanner", 1, 0, "QrCodeScanner");
 	}
 }
 
