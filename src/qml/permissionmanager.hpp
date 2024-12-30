@@ -13,14 +13,15 @@ class PermissionManager: public QObject
 public:
 	explicit PermissionManager(QObject *parent = nullptr);
 
-	Q_INVOKABLE void request();
+	Q_INVOKABLE void request() const;
 
 	[[nodiscard]]
-	auto getGranted() const -> bool;
+	static auto getGranted() -> bool;
 
 signals:
 	void grantedChanged();
 
 private:
-	bool isGranted = false;
+	[[nodiscard]]
+	static auto checkPermission() -> Qt::PermissionStatus;
 };

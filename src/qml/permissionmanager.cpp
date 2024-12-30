@@ -11,33 +11,28 @@ PermissionManager::PermissionManager(QObject *parent)
 {
 }
 
-void PermissionManager::request()
+void PermissionManager::request() const
 {
 #if QT_CONFIG(permissions)
-	const QPermission permission = QCameraPermission();
-	switch (qApp->checkPermission(permission))
+	if (checkPermission() == Qt::PermissionStatus::Undetermined)
 	{
-		case Qt::PermissionStatus::Undetermined:
-			qApp->requestPermission(permission, this, &PermissionManager::request);
-			break;
-
-		case Qt::PermissionStatus::Granted:
-			isGranted = true;
-			emit grantedChanged();
-			break;
-
-		case Qt::PermissionStatus::Denied:
-			isGranted = false;
-			emit grantedChanged();
-			break;
+		qApp->requestPermission(QCameraPermission{},
+			this, &PermissionManager::request);
 	}
-#else
-	isGranted = true;
-	emit grantedChanged();
 #endif
 }
 
-auto PermissionManager::getGranted() const -> bool
+auto PermissionManager::checkPermission() -> Qt::PermissionStatus
 {
-	return isGranted;
+#if QT_CONFIG(permissions)
+	const QPermission permission = QCameraPermission();
+	return qApp->checkPermission(permission);
+#else
+	return Qt::PermissionStatus::Granted;
+#endif
+}
+
+auto PermissionManager::getGranted() -> bool
+{
+	return checkPermission() == Qt::PermissionStatus::Granted;
 }
