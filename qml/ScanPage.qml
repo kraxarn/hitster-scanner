@@ -30,17 +30,19 @@ ColumnLayout {
 		Layout.fillHeight: true
 		Layout.margins: 8
 
+		VideoOutput {
+			id: viewfinder
+			anchors.fill: parent
+			fillMode: VideoOutput.PreserveAspectCrop
+		}
+
 		CaptureSession {
-			videoOutput: videoOutput
+			videoOutput: viewfinder
 
 			camera: Camera {
 				id: camera
+				active: true
 			}
-		}
-
-		VideoOutput {
-			id: videoOutput
-			anchors.fill: parent
 		}
 	}
 
