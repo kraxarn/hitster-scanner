@@ -12,6 +12,7 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/HomePage.qml
 	qml/HtmlInfoPage.qml
 	qml/ScanPage.qml
+	qml/Logo.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf
