@@ -54,7 +54,7 @@ jobs:
         env:
           QT_HOST_PATH: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/gcc_64
           ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/${{env.NDK_VERSION}}
-        run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+        run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSPOTIFY_CLIENT_ID=${{secrets.SPOTIFY_CLIENT_ID}} -DSPOTIFY_CLIENT_SECRET=${{secrets.SPOTIFY_CLIENT_SECRET}}
 
       - name: Build
         run: |
