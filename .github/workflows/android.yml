@@ -1,0 +1,76 @@
+name: Android
+
+on: [ push, pull_request ]
+
+env:
+  BUILD_TYPE: Release
+  QT_VERSION: "6.8.1"
+  QT_ARCH: "android_arm64_v8a"
+  QT_HOST_ARCH: "gcc_64"
+  QT_TARGET: "android"
+  # https://doc.qt.io/qt-6/android.html
+  PLATFORM_VERSION: "34"
+  BUILD_TOOLS_VERSION: "34.0.0"
+  NDK_VERSION: "26.1.10909125"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'cmdline-tools;latest platform-tools platforms;android-${{env.PLATFORM_VERSION}} build-tools;${{env.BUILD_TOOLS_VERSION}} ndk;${{env.NDK_VERSION}}'
+
+      - name: Install Qt (Android)
+        uses: jurplel/install-qt-action@v3
+        with:
+          cache: true
+          version: ${{env.QT_VERSION}}
+          arch: ${{env.QT_ARCH}}
+          target: ${{env.QT_TARGET}}
+
+      - name: Install Qt (Linux)
+        uses: jurplel/install-qt-action@v3
+        with:
+          cache: true
+          version: ${{env.QT_VERSION}}
+          arch: ${{env.QT_HOST_ARCH}}
+
+      - name: Configure CMake
+        env:
+          QT_HOST_PATH: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/${{env.QT_HOST_ARCH}}
+          ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/${{env.NDK_VERSION}}
+        run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE
+
+      - name: Build
+        run: |
+          cmake --build .
+          mv android-build/build/outputs/apk/release/android-build-release-unsigned.apk android-build/build/outputs/apk/release/hitster.apk
+
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        id: signApk
+        with:
+          releaseDirectory: android-build/build/outputs/apk/release
+          signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
+          alias: 'hitster'
+          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hitster
+          path: ${{steps.signApk.outputs.signedReleaseFile}}
