@@ -40,6 +40,7 @@ jobs:
           version: ${{env.QT_VERSION}}
           arch: ${{env.QT_ARCH}}
           target: ${{env.QT_TARGET}}
+          modules: 'qtmultimedia qtwebview'
 
       - name: Install Qt (Linux)
         uses: jurplel/install-qt-action@v3
@@ -47,6 +48,7 @@ jobs:
           cache: true
           version: ${{env.QT_VERSION}}
           arch: ${{env.QT_HOST_ARCH}}
+          modules: 'qtmultimedia qtwebview'
 
       - name: Configure CMake
         env:
