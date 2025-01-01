@@ -13,6 +13,8 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/HtmlInfoPage.qml
 	qml/ScanPage.qml
 	qml/Logo.qml
+	qml/LoginPage.qml
+	qml/AuthPage.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf

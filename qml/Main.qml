@@ -17,7 +17,19 @@ ApplicationWindow {
 	StackView {
 		id: stack
 		anchors.fill: parent
-		initialItem: homePage
+		initialItem: loginPage
+	}
+
+	Component {
+		id: loginPage
+		LoginPage {
+		}
+	}
+
+	Component {
+		id: authPage
+		AuthPage {
+		}
 	}
 
 	Component {

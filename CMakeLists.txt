@@ -4,7 +4,7 @@ project(hitster VERSION 0.0.1 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.7 REQUIRED COMPONENTS Core Gui Quick QuickControls2 LinguistTools Multimedia)
+find_package(Qt6 6.7 REQUIRED COMPONENTS Core Gui Quick QuickControls2 LinguistTools Multimedia WebView)
 
 qt_standard_project_setup(
 	REQUIRES 6.7
@@ -34,6 +34,12 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	target_compile_definitions(${PROJECT_NAME} PRIVATE QT_QML_DEBUG)
 endif ()
 
+set(SPOTIFY_CLIENT_ID "" CACHE STRING "Spotify client ID")
+set(SPOTIFY_CLIENT_SECRET "" CACHE STRING "Spotify client secret")
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE SPOTIFY_CLIENT_ID="${SPOTIFY_CLIENT_ID}")
+target_compile_definitions(${PROJECT_NAME} PRIVATE SPOTIFY_CLIENT_SECRET="${SPOTIFY_CLIENT_SECRET}")
+
 include(deps/zxing.cmake)
 target_link_libraries(${PROJECT_NAME} PRIVATE ZXing)
 
@@ -49,4 +55,5 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Quick
 	Qt6::QuickControls2
 	Qt6::Multimedia
+	Qt6::WebView
 )
