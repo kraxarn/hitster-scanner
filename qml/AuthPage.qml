@@ -40,7 +40,10 @@ ColumnLayout {
 	SpotifyApi {
 		id: api
 
-		onAuthenticatedChanged: stack.pop()
+		onAuthenticatedChanged: {
+			stack.pop()
+			stack.replace(homePage)
+		}
 	}
 
 	WebView {
@@ -48,8 +51,7 @@ ColumnLayout {
 		url: api.authUrl()
 
 		onLoadingChanged: (request) => {
-			if (api.tryAuthenticate(request.url)) {
-			}
+			api.tryAuthenticate(request.url)
 		}
 
 		Layout.fillWidth: true

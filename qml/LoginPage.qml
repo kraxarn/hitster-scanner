@@ -3,8 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Controls.Material
 
-import SpotifyApi
-
 ColumnLayout {
 	spacing: 16
 
@@ -22,10 +20,6 @@ ColumnLayout {
 
 	Item {
 		Layout.fillHeight: true
-	}
-
-	SpotifyApi {
-		id: api
 	}
 
 	MenuButton {
