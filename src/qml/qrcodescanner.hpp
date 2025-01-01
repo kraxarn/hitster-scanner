@@ -1,5 +1,7 @@
 #pragma once
 
+#include "urlresolver.hpp"
+
 #include <QObject>
 #include <qqmlintegration.h>
 #include <QVideoSink>
@@ -26,4 +28,7 @@ signals:
 
 private:
 	QVideoSink *sink = nullptr;
+	UrlResolver *urlResolver;
+
+	void onUrlResolved(const QUrl &url);
 };

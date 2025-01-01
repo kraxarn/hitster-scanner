@@ -2,12 +2,14 @@
 
 #include "ReadBarcode.h"
 
-#include <QDebug>
 #include <QVideoFrame>
 
 QrCodeScanner::QrCodeScanner(QObject *parent)
-	: QObject(parent)
+	: QObject(parent),
+	urlResolver(new UrlResolver(this))
 {
+	connect(urlResolver, &UrlResolver::resolved,
+		this, &QrCodeScanner::onUrlResolved);
 }
 
 auto QrCodeScanner::getSink() const -> QVideoSink *
@@ -111,5 +113,19 @@ void QrCodeScanner::scan() const
 		return;
 	}
 
-	// ...
+	const auto text = result.text(ZXing::TextMode::Plain);
+	const QUrl url(QString::fromStdString(text), QUrl::StrictMode);
+
+	if (!url.isValid())
+	{
+		qWarning() << url.errorString();
+		return;
+	}
+
+	urlResolver->resolve(url);
+}
+
+void QrCodeScanner::onUrlResolved(const QUrl &url)
+{
+	qInfo() << "Found track ID:" << url.fileName();
 }
