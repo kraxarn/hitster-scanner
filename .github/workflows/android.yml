@@ -4,7 +4,7 @@ on: [ push, pull_request ]
 
 env:
   BUILD_TYPE: Release
-  QT_VERSION: "6.8.1"
+  QT_VERSION: "6.9.0"
   QT_ARCH: "android_arm64_v8a"
   QT_HOST_ARCH: "linux_gcc_64"
   QT_TARGET: "android"
