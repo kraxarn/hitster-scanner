@@ -40,6 +40,9 @@ set(SPOTIFY_CLIENT_SECRET "" CACHE STRING "Spotify client secret")
 target_compile_definitions(${PROJECT_NAME} PRIVATE SPOTIFY_CLIENT_ID="${SPOTIFY_CLIENT_ID}")
 target_compile_definitions(${PROJECT_NAME} PRIVATE SPOTIFY_CLIENT_SECRET="${SPOTIFY_CLIENT_SECRET}")
 
+include(cmake/AndroidVersionCode.cmake)
+android_version_code(ANDROID_VERSION_CODE)
+
 include(deps/zxing.cmake)
 target_link_libraries(${PROJECT_NAME} PRIVATE ZXing)
 
@@ -47,6 +50,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	WIN32_EXECUTABLE TRUE
 	MACOSX_BUNDLE TRUE
 	MACOSX_BUNDLE_INFO_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/res/app/Info.plist"
+	QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/res/app/android"
+	QT_ANDROID_VERSION_NAME ${PROJECT_VERSION}
+	QT_ANDROID_VERSION_CODE ${ANDROID_VERSION_CODE}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
