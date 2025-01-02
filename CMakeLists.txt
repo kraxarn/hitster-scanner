@@ -58,6 +58,13 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	QT_ANDROID_APP_ICON "@mipmap/ic_launcher"
 )
 
+if (ANDROID)
+	# Deprecated, but ffmpeg backend adds ~15 mb and not really used
+	set_target_properties(${PROJECT_NAME} PROPERTIES
+		QT_DEFAULT_MEDIA_BACKEND "android"
+	)
+endif ()
+
 target_link_libraries(${PROJECT_NAME} PRIVATE
 	Qt6::Core
 	Qt6::Gui
