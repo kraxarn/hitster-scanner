@@ -53,7 +53,7 @@ jobs:
       - name: Clean up unused files
         working-directory: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/${{env.QT_ARCH}}
         run: |
-          tree
+          file lib/libavcodec.so
           rm lib/libavcodec.so lib/libavcodec.so lib/libavformat.so lib/libavutil.so lib/libswresample.so lib/libswscale.so
 
       - name: Configure CMake
