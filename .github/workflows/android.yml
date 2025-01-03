@@ -62,6 +62,7 @@ jobs:
           find qml -name 'libqml_*_Fusion_*.so' -exec rm {} \;
           find qml -name 'libqml_*_Imagine_*.so' -exec rm {} \;
           find qml -name 'libqml_*_Universal_*.so' -exec rm {} \;
+          find lib -iname '*FFmpeg*.cmake' -exec rm {} \;
           find lib -iname '*BasicStyle*.cmake' -exec rm {} \;
           find lib -iname '*FluentWinUI3Style*.cmake' -exec rm {} \;
           find lib -iname '*FusionStyle*.cmake' -exec rm {} \;
