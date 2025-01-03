@@ -72,7 +72,7 @@ if (ANDROID)
 		qml/QtMultimedia/libqml_QtMultimedia_quickmultimediaplugin_arm64-v8a.so
 		qml/QtQml/Models/libqml_QtQml_Models_modelsplugin_arm64-v8a.so
 		qml/QtQml/libqml_QtQml_qmlplugin_arm64-v8a.so
-		qml/QtQml/libqml_QtQml_WorkerScript_workerscriptplugin_arm64-v8a.so
+		qml/QtQml/WorkerScript/libqml_QtQml_WorkerScript_workerscriptplugin_arm64-v8a.so
 		qml/QtQuick/Controls/impl/libqml_QtQuick_Controls_impl_qtquickcontrols2implplugin_arm64-v8a.so
 		qml/QtQuick/Controls/Material/impl/libqml_QtQuick_Controls_Material_impl_qtquickcontrols2materialstyleimplplugin_arm64-v8a.so
 		qml/QtQuick/Controls/Material/libqml_QtQuick_Controls_Material_qtquickcontrols2materialstyleplugin_arm64-v8a.so
