@@ -53,7 +53,7 @@ jobs:
       - name: Clean up unused files
         working-directory: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/${{env.QT_ARCH}}
         run: |
-          rm ./lib/libavcodec.so lib/libavcodec.so lib/libavformat.so lib/libavutil.so lib/libswresample.so lib/libswscale.so
+          find lib -name 'libav*.so' -exec rm {} \;
 
       - name: Configure CMake
         env:
