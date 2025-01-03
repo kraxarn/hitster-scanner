@@ -50,6 +50,14 @@ jobs:
           arch: ${{env.QT_HOST_ARCH}}
           modules: 'qtmultimedia qtwebview'
 
+      - name: Clean up unused files
+        run: |
+          find Qt -name "libavcodec.so" -exec rm {} \;
+          find Qt -name "libavformat.so" -exec rm {} \;
+          find Qt -name "libavutil.so" -exec rm {} \;
+          find Qt -name "libswresample.so" -exec rm {} \;
+          find Qt -name "libswscale.so" -exec rm {} \;
+
       - name: Configure CMake
         env:
           QT_HOST_PATH: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/gcc_64
