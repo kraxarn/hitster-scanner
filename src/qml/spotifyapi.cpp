@@ -115,6 +115,10 @@ void SpotifyApi::onReqeustFinished(QNetworkReply *reply)
 		authenticated = true;
 		emit authenticatedChanged();
 	}
+	else
+	{
+		qFatal() << reply->errorString();
+	}
 
 	reply->deleteLater();
 }
