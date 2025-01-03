@@ -46,14 +46,16 @@ ColumnLayout {
 		}
 	}
 
+	Label {
+		id: errorMessage
+	}
+
 	WebView {
 		id: browser
 		url: api.authUrl()
 
 		onLoadingChanged: (request) => {
-			if (request.errorString) {
-				console.error(request.errorString)
-			}
+			errorMessage.text = request.errorString
 			api.tryAuthenticate(request.url)
 		}
 
