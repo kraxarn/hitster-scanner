@@ -9,7 +9,7 @@
 
 #define ACCESS_TOKEN_KEY QStringLiteral("spotify/accessToken")
 #define REFRESH_TOKEN_KEY QStringLiteral("spotify/refreshToken")
-#define REDIRECT_URL QStringLiteral("http://localhost/ophisc")
+#define REDIRECT_URL QStringLiteral("https://localhost/auth")
 
 SpotifyApi::SpotifyApi(QObject *parent)
 	: QObject(parent),
