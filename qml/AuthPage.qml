@@ -51,6 +51,9 @@ ColumnLayout {
 		url: api.authUrl()
 
 		onLoadingChanged: (request) => {
+			if (request.errorString) {
+				console.error(request.errorString)
+			}
 			api.tryAuthenticate(request.url)
 		}
 
