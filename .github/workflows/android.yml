@@ -54,6 +54,9 @@ jobs:
         working-directory: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/${{env.QT_ARCH}}
         run: |
           find lib -name 'libav*.so' -exec rm {} \;
+          find lib -name 'libsw*.so' -exec rm {} \;
+          find lib -name 'libplugins_qmltooling*.so' -exec rm {} \;
+          find lib -name 'libQt6FFmpeg*.so' -exec rm {} \;
 
       - name: Configure CMake
         env:
