@@ -56,7 +56,6 @@ jobs:
           find lib -name 'libav*.so' -exec rm {} \;
           find lib -name 'libsw*.so' -exec rm {} \;
           find lib -name 'libQt6FFmpeg*.so' -exec rm {} \;
-          find plugins -name 'libplugins_qmltooling*.so' -exec rm {} \;
           find plugins -name 'libplugins_*ffmpeg*.so' -exec rm {} \;
           find qml -name 'libqml_*_Basic_*.so' -exec rm {} \;
           find qml -name 'libqml_*_FluentWinUI3_*.so' -exec rm {} \;
