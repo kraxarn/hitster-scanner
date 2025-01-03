@@ -57,10 +57,6 @@ jobs:
           find lib -name 'libsw*.so' -exec rm {} \;
           find lib -name 'libQt6FFmpeg*.so' -exec rm {} \;
           find plugins -name 'libplugins_*ffmpeg*.so' -exec rm {} \;
-          find qml -name 'libqml_*_FluentWinUI3_*.so' -exec rm {} \;
-          find qml -name 'libqml_*_Fusion_*.so' -exec rm {} \;
-          find qml -name 'libqml_*_Imagine_*.so' -exec rm {} \;
-          find qml -name 'libqml_*_Universal_*.so' -exec rm {} \;
 
       - name: Configure CMake
         env:
