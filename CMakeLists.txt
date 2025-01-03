@@ -34,6 +34,11 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	target_compile_definitions(${PROJECT_NAME} PRIVATE QT_QML_DEBUG)
 endif ()
 
+if (ANDROID)
+	include(cmake/AndroidOpenSSL.cmake)
+	add_android_openssl_libraries(${PROJECT_NAME})
+endif ()
+
 set(SPOTIFY_CLIENT_ID "" CACHE STRING "Spotify client ID")
 set(SPOTIFY_CLIENT_SECRET "" CACHE STRING "Spotify client secret")
 
