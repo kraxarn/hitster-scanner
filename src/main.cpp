@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QFontDatabase>
 #include <QQmlContext>
+#include <QtWebView>
 
 #include "qml/htmlinfo.hpp"
 #include "qml/permissionmanager.hpp"
@@ -25,6 +26,7 @@ auto main(int argc, char *argv[]) -> int
 	QCoreApplication::setApplicationVersion(QStringLiteral(APP_VERSION));
 	QCoreApplication::setOrganizationName(QStringLiteral(ORG_NAME));
 
+	QtWebView::initialize();
 	const QGuiApplication app(argc, argv);
 
 	QFontDatabase::addApplicationFont(QStringLiteral(":/res/font/regular.ttf"));
