@@ -47,12 +47,8 @@ auto SpotifyApi::authUrl() -> QUrl
 
 auto SpotifyApi::getAuthenticated() const -> bool
 {
-	return authenticated;
-}
-
-void SpotifyApi::setAuthenticated(const bool authenticated)
-{
-	this->authenticated = authenticated;
+	return !getAccessToken().isEmpty()
+		&& !getRefreshToken().isEmpty();
 }
 
 auto SpotifyApi::tryAuthenticate(const QUrl &url) -> bool
@@ -112,7 +108,6 @@ void SpotifyApi::onReqeustFinished(QNetworkReply *reply)
 		settings->setValue(ACCESS_TOKEN_KEY, json[QStringLiteral("access_token")]);
 		settings->setValue(REFRESH_TOKEN_KEY, json[QStringLiteral("refresh_token")]);
 
-		authenticated = true;
 		emit authenticatedChanged();
 	}
 	else

@@ -9,7 +9,7 @@ class SpotifyApi: public QObject
 	Q_OBJECT
 	QML_ELEMENT
 
-	Q_PROPERTY(bool authenticated READ getAuthenticated WRITE setAuthenticated NOTIFY authenticatedChanged)
+	Q_PROPERTY(bool authenticated READ getAuthenticated NOTIFY authenticatedChanged)
 
 public:
 	explicit SpotifyApi(QObject *parent = nullptr);
@@ -19,8 +19,6 @@ public:
 	[[nodiscard]]
 	auto getAuthenticated() const -> bool;
 
-	void setAuthenticated(bool authenticated);
-
 	Q_INVOKABLE bool tryAuthenticate(const QUrl &url);
 
 signals:
@@ -29,7 +27,6 @@ signals:
 private:
 	QSettings *settings;
 	QNetworkAccessManager *http = nullptr;
-	bool authenticated = false;
 
 	[[nodiscard]]
 	auto getAccessToken() const -> QString;
