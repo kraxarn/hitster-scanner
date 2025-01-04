@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Controls.Material
 import QtQuick.Controls
 
+import SpotifyApi
+
 ApplicationWindow {
 	id: root
 	title: qsTr("Hitster")
@@ -14,10 +16,14 @@ ApplicationWindow {
 	Material.background: Material.color(Material.Grey, Material.ShadeA700)
 	Material.accent: "#f9ccdb"
 
+	SpotifyApi {
+		id: api
+	}
+
 	StackView {
 		id: stack
 		anchors.fill: parent
-		initialItem: loginPage
+		initialItem: api.authenticated ? homePage : loginPage
 	}
 
 	Component {
