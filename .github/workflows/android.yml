@@ -77,12 +77,10 @@ jobs:
         run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSPOTIFY_CLIENT_ID="${{secrets.SPOTIFY_CLIENT_ID}}" -DSPOTIFY_CLIENT_SECRET="${{secrets.SPOTIFY_CLIENT_SECRET}}" -DKEYSTORE_PASS="${{secrets.KEYSTORE_PASSWORD}}"
 
       - name: Build
-        run: |
-          cmake --build .
-          mv android-build/build/outputs/apk/release/android-build-release-signed.apk android-build/build/outputs/apk/release/hitster.apk
+        run: cmake --build .
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: hitster
-          path: android-build/build/outputs/apk/release/hitster.apk
+          path: android-build/build/outputs/apk/release/*.apk
