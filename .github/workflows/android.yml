@@ -67,29 +67,24 @@ jobs:
           find lib -iname '*ImagineStyle*.cmake' -exec rm {} \;
           find lib -iname '*UniversalStyle*.cmake' -exec rm {} \;
 
+      - name: Prepare APK signing
+        env:
+          KEYSTORE: ${{secrets.KEYSTORE_FILE}}
+        run: echo -n "KEYSTORE" | base64 -d > "release.keystore"
+
       - name: Configure CMake
         env:
           QT_HOST_PATH: ${{runner.workspace}}/Qt/${{env.QT_VERSION}}/gcc_64
           ANDROID_NDK_ROOT: /usr/local/lib/android/sdk/ndk/${{env.NDK_VERSION}}
-        run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSPOTIFY_CLIENT_ID=${{secrets.SPOTIFY_CLIENT_ID}} -DSPOTIFY_CLIENT_SECRET=${{secrets.SPOTIFY_CLIENT_SECRET}}
+        run: ${{runner.workspace}}/Qt/$QT_VERSION/$QT_ARCH/bin/qt-cmake . -DCMAKE_BUILD_TYPE=$BUILD_TYPE -DSPOTIFY_CLIENT_ID=${{secrets.SPOTIFY_CLIENT_ID}} -DSPOTIFY_CLIENT_SECRET=${{secrets.SPOTIFY_CLIENT_SECRET}} -DKEYSTORE_PASS=${{secrets.KEYSTORE_PASSWORD}}
 
       - name: Build
         run: |
           cmake --build .
-          mv android-build/build/outputs/apk/release/android-build-release-unsigned.apk android-build/build/outputs/apk/release/hitster.apk
-
-      - name: Sign APK
-        uses: r0adkll/sign-android-release@v1
-        id: signApk
-        with:
-          releaseDirectory: android-build/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.KEYSTORE_FILE }}
-          alias: 'hitster'
-          keyStorePassword: ${{ secrets.KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.KEYSTORE_PASSWORD }}
+          mv android-build/build/outputs/apk/release/android-build-release-signed.apk android-build/build/outputs/apk/release/hitster.apk
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: hitster
-          path: ${{steps.signApk.outputs.signedReleaseFile}}
+          path: android-build/build/outputs/apk/release/hitster.apk
