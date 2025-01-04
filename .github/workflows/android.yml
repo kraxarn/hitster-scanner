@@ -68,9 +68,7 @@ jobs:
           find lib -iname '*UniversalStyle*.cmake' -exec rm {} \;
 
       - name: Prepare APK signing
-        env:
-          KEYSTORE: ${{secrets.KEYSTORE_FILE}}
-        run: echo -n "KEYSTORE" | base64 -d > "release.keystore"
+        run: echo -n "${{secrets.KEYSTORE_FILE}}" | base64 -d > "release.keystore"
 
       - name: Configure CMake
         env:
