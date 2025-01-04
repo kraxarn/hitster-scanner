@@ -83,4 +83,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hitster
-          path: android-build/**/*.apk
+          path: android-build/*.apk
