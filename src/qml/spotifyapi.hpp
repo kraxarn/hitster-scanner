@@ -29,6 +29,8 @@ public:
 
 	Q_INVOKABLE void fetchCurrentlyPlaying();
 
+	Q_INVOKABLE void refreshToken();
+
 signals:
 	void authenticatedChanged();
 	void currentlyPlayingChanged();

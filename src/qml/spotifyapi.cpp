@@ -115,6 +115,14 @@ void SpotifyApi::authenticate(const QString &code)
 	token(data);
 }
 
+void SpotifyApi::refreshToken()
+{
+	const auto data = QStringLiteral("grant_type=refresh_token&refresh_token=%1")
+		.arg(getRefreshToken());
+
+	token(data);
+}
+
 void SpotifyApi::authenticate(QNetworkReply *reply)
 {
 	const auto json = QJsonDocument::fromJson(reply->readAll()).object();
