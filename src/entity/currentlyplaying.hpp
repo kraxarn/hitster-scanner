@@ -11,7 +11,8 @@ class CurrentlyPlaying
 	QML_VALUE_TYPE(CurrentlyPlaying)
 
 	Q_PROPERTY(Track item READ getItem)
-	Q_PROPERTY(int progressMs READ getProgressMs)
+	Q_PROPERTY(qint32 progressMs READ getProgressMs)
+	Q_PROPERTY(qint64 timestamp READ getTimestamp)
 
 public:
 	static auto fromJson(const QJsonObject &json) -> CurrentlyPlaying;
@@ -20,9 +21,13 @@ public:
 	auto getItem() const -> const Track &;
 
 	[[nodiscard]]
-	auto getProgressMs() const -> int;
+	auto getProgressMs() const -> qint32;
+
+	[[nodiscard]]
+	auto getTimestamp() const -> qint64;
 
 private:
 	Track item;
-	int progressMs = 0;
+	qint32 progressMs = 0;
+	qint64 timestamp = 0;
 };
