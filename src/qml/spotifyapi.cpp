@@ -138,18 +138,18 @@ void SpotifyApi::authenticate(QNetworkReply *reply)
 	reply->deleteLater();
 }
 
-void SpotifyApi::refresh()
+void SpotifyApi::fetchCurrentlyPlaying()
 {
 	const auto request = require(QStringLiteral("/me/player/currently-playing"));
 
 	auto *reply = http->get(request);
 	connect(reply, &QNetworkReply::finished, [this, reply]
 	{
-		refresh(reply);
+		fetchCurrentlyPlaying(reply);
 	});
 }
 
-void SpotifyApi::refresh(QNetworkReply *reply)
+void SpotifyApi::fetchCurrentlyPlaying(QNetworkReply *reply)
 {
 	if (reply->error() != QNetworkReply::NoError)
 	{

@@ -27,7 +27,7 @@ public:
 
 	Q_INVOKABLE bool tryAuthenticate(const QUrl &url);
 
-	Q_INVOKABLE void refresh();
+	Q_INVOKABLE void fetchCurrentlyPlaying();
 
 signals:
 	void authenticatedChanged();
@@ -53,5 +53,5 @@ private:
 	void authenticate(const QString &code);
 	void authenticate(QNetworkReply *reply);
 
-	void refresh(QNetworkReply *reply);
+	void fetchCurrentlyPlaying(QNetworkReply *reply);
 };
