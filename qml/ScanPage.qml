@@ -54,7 +54,7 @@ ColumnLayout {
 
 		Timer {
 			interval: 100
-			running: true
+			running: camera.active
 			repeat: true
 			onTriggered: scanner.scan()
 		}
