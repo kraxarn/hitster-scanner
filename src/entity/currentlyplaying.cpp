@@ -6,8 +6,8 @@ auto CurrentlyPlaying::fromJson(const QJsonObject &json) -> CurrentlyPlaying
 
 	currentlyPlaying.progressMs = json[QStringLiteral("progress_ms")].toInt();
 
-	const auto track = json[QStringLiteral("track")].toObject();
-	currentlyPlaying.item = Track::fromJson(track);
+	const auto item = json[QStringLiteral("item")].toObject();
+	currentlyPlaying.item = Track::fromJson(item);
 
 	return currentlyPlaying;
 }
