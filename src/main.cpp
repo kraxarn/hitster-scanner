@@ -8,6 +8,7 @@
 #include "qml/permissionmanager.hpp"
 #include "qml/qrcodescanner.hpp"
 #include "qml/spotifyapi.hpp"
+#include "qml/wordscrambler.hpp"
 
 namespace
 {
@@ -17,6 +18,7 @@ namespace
 		qmlRegisterType<PermissionManager>("PermissionManager", 1, 0, "PermissionManager");
 		qmlRegisterType<QrCodeScanner>("QrCodeScanner", 1, 0, "QrCodeScanner");
 		qmlRegisterType<SpotifyApi>("SpotifyApi", 1, 0, "SpotifyApi");
+		qmlRegisterType<WordScrambler>("WordScrambler", 1, 0, "WordScrambler");
 	}
 }
 
