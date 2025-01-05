@@ -17,7 +17,7 @@ public:
 	Q_INVOKABLE QString scramble(const QString &text);
 
 	[[nodiscard]]
-	static auto getSeed() -> quint32;
+	auto getSeed() const -> quint32;
 
 	void setSeed(qint32 seed);
 
@@ -26,4 +26,5 @@ signals:
 
 private:
 	QRandomGenerator random;
+	qint32 seed = 1;
 };

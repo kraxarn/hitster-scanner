@@ -8,20 +8,21 @@ WordScrambler::WordScrambler(QObject *parent)
 {
 }
 
-auto WordScrambler::getSeed() -> quint32
+auto WordScrambler::getSeed() const -> quint32
 {
-	qWarning() << "Getting seed is not supported";
-	return 0;
+	return seed;
 }
 
 void WordScrambler::setSeed(const qint32 seed)
 {
-	random.seed(seed);
+	this->seed = seed;
 	emit seedChanged();
 }
 
 QString WordScrambler::scramble(const QString &text)
 {
+	random.seed(seed);
+
 	QSet characterSet(text.cbegin(), text.cend());
 	characterSet.remove(QChar::Space);
 	const auto characters = characterSet.values();
