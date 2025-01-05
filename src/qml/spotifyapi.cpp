@@ -134,7 +134,11 @@ void SpotifyApi::authenticate(QNetworkReply *reply)
 	else if (json.contains(QStringLiteral("access_token")))
 	{
 		settings->setValue(ACCESS_TOKEN_KEY, json[QStringLiteral("access_token")]);
-		settings->setValue(REFRESH_TOKEN_KEY, json[QStringLiteral("refresh_token")]);
+
+		if (json.contains(QStringLiteral("refresh_token")))
+		{
+			settings->setValue(REFRESH_TOKEN_KEY, json[QStringLiteral("refresh_token")]);
+		}
 
 		emit authenticatedChanged();
 	}
