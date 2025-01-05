@@ -18,6 +18,8 @@ ApplicationWindow {
 
 	SpotifyApi {
 		id: api
+
+		Component.onCompleted: api.refreshToken()
 	}
 
 	StackView {
