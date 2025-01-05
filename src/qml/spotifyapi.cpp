@@ -13,7 +13,8 @@
 
 SpotifyApi::SpotifyApi(QObject *parent)
 	: QObject(parent),
-	settings(new QSettings(this))
+	settings(new QSettings(this)),
+	http(new QNetworkAccessManager(this))
 {
 }
 
@@ -27,11 +28,24 @@ auto SpotifyApi::getRefreshToken() const -> QString
 	return settings->value(REFRESH_TOKEN_KEY).toString();
 }
 
+auto SpotifyApi::require(const QString &path) const -> QNetworkRequest
+{
+	QNetworkRequest request;
+
+	request.setUrl(QUrl(QStringLiteral("https://api.spotify.com/v1") + path));
+
+	const auto token = QStringLiteral("Bearer %1").arg(getAccessToken());
+	request.setRawHeader(QStringLiteral("Authorization").toUtf8(), token.toUtf8());
+
+	return request;
+}
+
 auto SpotifyApi::authUrl() -> QUrl
 {
 	const QStringList scopes{
 		QStringLiteral("user-modify-playback-state"),
 		QStringLiteral("streaming"),
+		QStringLiteral("user-read-currently-playing"),
 	};
 
 	const auto url = QStringLiteral(
@@ -49,6 +63,11 @@ auto SpotifyApi::getAuthenticated() const -> bool
 {
 	return !getAccessToken().isEmpty()
 		&& !getRefreshToken().isEmpty();
+}
+
+auto SpotifyApi::getCurrentlyPlaying() const -> const CurrentlyPlaying &
+{
+	return currentlyPlaying;
 }
 
 auto SpotifyApi::tryAuthenticate(const QUrl &url) -> bool
@@ -69,14 +88,6 @@ auto SpotifyApi::tryAuthenticate(const QUrl &url) -> bool
 
 void SpotifyApi::authenticate(const QString &code)
 {
-	if (http == nullptr)
-	{
-		http = new QNetworkAccessManager(this);
-
-		connect(http, &QNetworkAccessManager::finished,
-			this, &SpotifyApi::onReqeustFinished);
-	}
-
 	const auto data = QStringLiteral("grant_type=authorization_code&code=%1&redirect_uri=%2")
 		.arg(code, REDIRECT_URL);
 
@@ -92,10 +103,14 @@ void SpotifyApi::authenticate(const QString &code)
 	request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/x-www-form-urlencoded"));
 	request.setRawHeader(QStringLiteral("Authorization").toUtf8(), auth.toUtf8());
 
-	http->post(request, data.toUtf8());
+	auto *reply = http->post(request, data.toUtf8());
+	connect(reply, &QNetworkReply::finished, [this, reply]
+	{
+		authenticate(reply);
+	});
 }
 
-void SpotifyApi::onReqeustFinished(QNetworkReply *reply)
+void SpotifyApi::authenticate(QNetworkReply *reply)
 {
 	const auto json = QJsonDocument::fromJson(reply->readAll()).object();
 
@@ -115,5 +130,31 @@ void SpotifyApi::onReqeustFinished(QNetworkReply *reply)
 		qFatal() << reply->errorString();
 	}
 
+	reply->deleteLater();
+}
+
+void SpotifyApi::refresh()
+{
+	const auto request = require(QStringLiteral("/me/player/currently-playing"));
+
+	auto *reply = http->get(request);
+	connect(reply, &QNetworkReply::finished, [this, reply]
+	{
+		refresh(reply);
+	});
+}
+
+void SpotifyApi::refresh(QNetworkReply *reply)
+{
+	if (reply->error() != QNetworkReply::NoError)
+	{
+		reply->deleteLater();
+		return;
+	}
+
+	const auto json = QJsonDocument::fromJson(reply->readAll()).object();
+	currentlyPlaying = CurrentlyPlaying::fromJson(json);
+
+	emit currentlyPlayingChanged();
 	reply->deleteLater();
 }
