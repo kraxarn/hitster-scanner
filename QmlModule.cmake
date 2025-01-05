@@ -25,4 +25,6 @@ qt_add_qml_module(${PROJECT_NAME}
 	res/icon/web.svg
 	res/icon/flash.svg
 	res/icon/flash-off.svg
+	res/icon/eye.svg
+	res/icon/eye-off.svg
 )
