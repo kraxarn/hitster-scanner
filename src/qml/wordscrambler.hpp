@@ -8,7 +8,6 @@ class WordScrambler: public QObject
 {
 	Q_OBJECT
 	QML_ELEMENT
-	QML_SINGLETON
 
 	Q_PROPERTY(qint32 seed READ getSeed WRITE setSeed NOTIFY seedChanged)
 
