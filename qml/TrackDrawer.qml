@@ -7,7 +7,6 @@ import QtQuick.Effects
 import WordScrambler
 
 Drawer {
-	id: drawer
 	dragMargin: 0
 	edge: Qt.BottomEdge
 	width: parent.width
@@ -72,7 +71,7 @@ Drawer {
 
 		Button {
 			flat: true
-			icon.source: `qrc:/res/icon/${drawer.scrambled ? "eye-off" : "eye"}.svg`
+			icon.source: `qrc:/res/icon/${scrambled ? "eye-off" : "eye"}.svg`
 			onClicked: scrambled = !scrambled
 
 			Layout.rightMargin: 16
