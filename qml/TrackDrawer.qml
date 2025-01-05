@@ -4,6 +4,8 @@ import QtQuick.Controls.Material
 import QtQuick.Controls
 import QtQuick.Effects
 
+import WordScrambler
+
 Drawer {
 	id: drawer
 	dragMargin: 0
@@ -18,12 +20,20 @@ Drawer {
 	property real trackProgress
 	property real trackDuration
 
+	property bool scrambled: true
+	property int randomSeed: 0
+
+	WordScrambler {
+		id: scrambler
+		seed: randomSeed
+	}
+
 	RowLayout {
 		anchors.fill: parent
 
 		Image {
 			id: album
-			source: drawer.albumUrl
+			source: albumUrl
 			fillMode: Image.PreserveAspectFit
 			asynchronous: true
 
@@ -41,23 +51,31 @@ Drawer {
 			Layout.leftMargin: 16
 
 			Label {
-				text: drawer.trackName
+				text: scrambled ? scrambler.scramble(trackName) : trackName
 				font.pointSize: 18
 			}
 
 			Label {
-				text: drawer.artistName
+				text: scrambled ? scrambler.scramble(artistName) : artistName
 				font.pointSize: 16
 			}
 
 			ProgressBar {
-				value: drawer.trackProgress
-				to: drawer.trackDuration
+				value: trackProgress
+				to: trackDuration
 
 				Layout.topMargin: 16
-				Layout.rightMargin: 32
+				Layout.rightMargin: 16
 				Layout.fillWidth: true
 			}
+		}
+
+		Button {
+			flat: true
+			icon.source: `qrc:/res/icon/${drawer.scrambled ? "eye-off" : "eye"}.svg`
+			onClicked: scrambled = !scrambled
+
+			Layout.rightMargin: 16
 		}
 	}
 }
