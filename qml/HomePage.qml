@@ -52,6 +52,12 @@ ColumnLayout {
 		onClicked: stack.push(faqPage)
 	}
 
+	MenuButton {
+		text: qsTr("Change account")
+		Layout.fillWidth: true
+		onClicked: stack.push(authPage)
+	}
+
 	Item {
 		Layout.fillHeight: true
 	}
