@@ -86,11 +86,8 @@ auto SpotifyApi::tryAuthenticate(const QUrl &url) -> bool
 	return false;
 }
 
-void SpotifyApi::authenticate(const QString &code)
+void SpotifyApi::token(const QString &data)
 {
-	const auto data = QStringLiteral("grant_type=authorization_code&code=%1&redirect_uri=%2")
-		.arg(code, REDIRECT_URL);
-
 	const QString token = QString("%1:%2")
 		.arg(QStringLiteral(SPOTIFY_CLIENT_ID), QStringLiteral(SPOTIFY_CLIENT_SECRET))
 		.toUtf8()
@@ -108,6 +105,14 @@ void SpotifyApi::authenticate(const QString &code)
 	{
 		authenticate(reply);
 	});
+}
+
+void SpotifyApi::authenticate(const QString &code)
+{
+	const auto data = QStringLiteral("grant_type=authorization_code&code=%1&redirect_uri=%2")
+		.arg(code, REDIRECT_URL);
+
+	token(data);
 }
 
 void SpotifyApi::authenticate(QNetworkReply *reply)

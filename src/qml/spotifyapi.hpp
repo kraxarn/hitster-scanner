@@ -48,6 +48,8 @@ private:
 	[[nodiscard]]
 	auto getRefreshToken() const -> QString;
 
+	void token(const QString &data);
+
 	void authenticate(const QString &code);
 	void authenticate(QNetworkReply *reply);
 
