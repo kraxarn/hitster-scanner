@@ -1,17 +1,27 @@
 #include "qml/wordscrambler.hpp"
 
+#include <QDebug>
 #include <QRandomGenerator>
-#include <QSet>
 
 WordScrambler::WordScrambler(QObject *parent)
 	: QObject(parent)
 {
 }
 
+auto WordScrambler::getSeed() -> quint32
+{
+	qWarning() << "Getting seed is not supported";
+	return 0;
+}
+
+void WordScrambler::setSeed(const qint32 seed)
+{
+	random.seed(seed);
+	emit seedChanged();
+}
+
 QString WordScrambler::scramble(const QString &text)
 {
-	QRandomGenerator random;
-
 	QSet characterSet(text.cbegin(), text.cend());
 	characterSet.remove(QChar::Space);
 	const auto characters = characterSet.values();

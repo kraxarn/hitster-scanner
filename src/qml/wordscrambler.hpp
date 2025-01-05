@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <qqmlintegration.h>
+#include <QRandomGenerator>
 
 class WordScrambler: public QObject
 {
@@ -9,8 +10,21 @@ class WordScrambler: public QObject
 	QML_ELEMENT
 	QML_SINGLETON
 
+	Q_PROPERTY(qint32 seed READ getSeed WRITE setSeed NOTIFY seedChanged)
+
 public:
 	explicit WordScrambler(QObject *parent = nullptr);
 
-	Q_INVOKABLE static QString scramble(const QString &text);
+	Q_INVOKABLE QString scramble(const QString &text);
+
+	[[nodiscard]]
+	static auto getSeed() -> quint32;
+
+	void setSeed(qint32 seed);
+
+signals:
+	void seedChanged();
+
+private:
+	QRandomGenerator random;
 };
