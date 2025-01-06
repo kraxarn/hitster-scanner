@@ -33,6 +33,12 @@ Drawer {
 			source: albumUrl
 			fillMode: Image.PreserveAspectFit
 			asynchronous: true
+			smooth: !scrambled
+
+			sourceSize {
+				width: scrambled ? 8 : 300
+				height: scrambled ? 8 : 300
+			}
 
 			Layout.preferredWidth: 150
 			Layout.preferredHeight: 150
