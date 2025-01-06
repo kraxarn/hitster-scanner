@@ -133,5 +133,8 @@ void QrCodeScanner::scan()
 
 void QrCodeScanner::onUrlResolved(const QUrl &url)
 {
-	qInfo() << "Found track ID:" << url.fileName();
+	const auto uri = QStringLiteral("spotify:track:%1")
+		.arg(url.fileName());
+
+	emit resolved(uri);
 }

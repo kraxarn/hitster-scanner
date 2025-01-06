@@ -52,6 +52,7 @@ ColumnLayout {
 			sink: viewfinder.videoSink
 
 			onScanned: trackDrawer.open()
+			onResolved: (uri) => api.play(uri)
 		}
 
 		Timer {

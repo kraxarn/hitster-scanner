@@ -26,6 +26,7 @@ public:
 signals:
 	void sinkChanged();
 	void scanned();
+	void resolved(const QString &uri);
 
 private:
 	QVideoSink *sink = nullptr;
