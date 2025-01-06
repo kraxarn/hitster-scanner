@@ -23,7 +23,7 @@ void QrCodeScanner::setSink(QVideoSink *sink)
 	emit sinkChanged();
 }
 
-void QrCodeScanner::scan() const
+void QrCodeScanner::scan()
 {
 	if (sink == nullptr)
 	{
@@ -128,6 +128,7 @@ void QrCodeScanner::scan() const
 	}
 
 	urlResolver->resolve(url);
+	emit scanned();
 }
 
 void QrCodeScanner::onUrlResolved(const QUrl &url)

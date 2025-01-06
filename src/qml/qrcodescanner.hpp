@@ -21,10 +21,11 @@ public:
 
 	void setSink(QVideoSink *sink);
 
-	Q_INVOKABLE void scan() const;
+	Q_INVOKABLE void scan();
 
 signals:
 	void sinkChanged();
+	void scanned();
 
 private:
 	QVideoSink *sink = nullptr;
