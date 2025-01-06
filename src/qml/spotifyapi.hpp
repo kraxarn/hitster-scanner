@@ -31,6 +31,8 @@ public:
 
 	Q_INVOKABLE void refreshToken();
 
+	Q_INVOKABLE void play(const QString &uri) const;
+
 signals:
 	void authenticatedChanged();
 	void currentlyPlayingChanged();

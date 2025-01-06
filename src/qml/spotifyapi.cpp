@@ -32,7 +32,7 @@ auto SpotifyApi::require(const QString &path) const -> QNetworkRequest
 {
 	QNetworkRequest request;
 
-	request.setUrl(QUrl(QStringLiteral("https://api.spotify.com/v1") + path));
+	request.setUrl(QUrl(QStringLiteral("https://api.spotify.com/v1/") + path));
 
 	const auto token = QStringLiteral("Bearer %1").arg(getAccessToken());
 	request.setRawHeader(QStringLiteral("Authorization").toUtf8(), token.toUtf8());
@@ -152,7 +152,7 @@ void SpotifyApi::authenticate(QNetworkReply *reply)
 
 void SpotifyApi::fetchCurrentlyPlaying()
 {
-	const auto request = require(QStringLiteral("/me/player/currently-playing"));
+	const auto request = require(QStringLiteral("me/player/currently-playing"));
 
 	auto *reply = http->get(request);
 	connect(reply, &QNetworkReply::finished, [this, reply]
@@ -174,4 +174,18 @@ void SpotifyApi::fetchCurrentlyPlaying(QNetworkReply *reply)
 
 	emit currentlyPlayingChanged();
 	reply->deleteLater();
+}
+
+void SpotifyApi::play(const QString &uri) const
+{
+	const auto request = require(QStringLiteral("me/player/play"));
+
+	QJsonObject json;
+	json[QStringLiteral("context_uri")] = uri;
+
+	auto *reply = http->post(request, QJsonDocument(json).toJson());
+	connect(reply, &QNetworkReply::finished, [reply]
+	{
+		reply->deleteLater();
+	});
 }
