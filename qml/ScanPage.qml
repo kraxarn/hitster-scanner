@@ -72,7 +72,16 @@ ColumnLayout {
 		}
 
 		ToolButton {
-			icon.source: "qrc:/res/icon/flash-off.svg"
+			enabled: camera.isTorchModeSupported(Camera.TorchOn)
+
+			icon.source: camera.torchMode === Camera.TorchOn
+				? "qrc:/res/icon/flash.svg"
+				: "qrc:/res/icon/flash-off.svg"
+
+			onClicked: camera.torchMode = camera.torchMode === Camera.TorchOn
+				? Camera.TorchOff
+				: Camera.TorchOn
+
 			Layout.alignment: Qt.AlignVCenter
 		}
 
