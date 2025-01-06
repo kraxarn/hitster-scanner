@@ -4,24 +4,14 @@
 #include <QRandomGenerator>
 
 WordScrambler::WordScrambler(QObject *parent)
-	: QObject(parent)
+	: QObject(parent),
+	seedValue(QRandomGenerator::global()->generate())
 {
-}
-
-auto WordScrambler::getSeed() const -> quint32
-{
-	return seed;
-}
-
-void WordScrambler::setSeed(const qint32 seed)
-{
-	this->seed = seed;
-	emit seedChanged();
 }
 
 QString WordScrambler::scramble(const QString &text)
 {
-	random.seed(seed);
+	random.seed(seedValue);
 
 	QSet characterSet(text.cbegin(), text.cend());
 	characterSet.remove(QChar::Space);

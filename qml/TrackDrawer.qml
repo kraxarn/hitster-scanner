@@ -20,11 +20,9 @@ Drawer {
 	property real trackDuration
 
 	property bool scrambled: true
-	property int randomSeed: 0
 
 	WordScrambler {
 		id: scrambler
-		seed: randomSeed
 	}
 
 	RowLayout {
