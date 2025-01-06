@@ -43,13 +43,15 @@ ColumnLayout {
 
 			camera: Camera {
 				id: camera
-				active: true
+				active: !trackDrawer.opened
 			}
 		}
 
 		QrCodeScanner {
 			id: scanner
 			sink: viewfinder.videoSink
+
+			onScanned: trackDrawer.open()
 		}
 
 		Timer {
@@ -76,5 +78,23 @@ ColumnLayout {
 		Item {
 			Layout.fillWidth: true
 		}
+	}
+
+	Timer {
+		interval: 1000
+		running: trackDrawer.opened
+		repeat: true
+		onTriggered: api.fetchCurrentlyPlaying()
+	}
+
+	TrackDrawer {
+		id: trackDrawer
+		albumUrl: api.currentlyPlaying.item.album.images.length > 0
+			? api.currentlyPlaying.item.album.images.find(image => image.width === 300 && image.height === 300).url
+			: ""
+		trackName: api.currentlyPlaying.item.name
+		artistName: api.currentlyPlaying.item.artists.map(artist => artist.name).join(", ")
+		trackProgress: api.currentlyPlaying.progressMs
+		trackDuration: api.currentlyPlaying.item.durationMs
 	}
 }
