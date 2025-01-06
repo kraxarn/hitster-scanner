@@ -1,6 +1,6 @@
 #pragma once
 
-#include "entity/currentlyplaying.hpp"
+#include "entity/playbackstate.hpp"
 
 #include <QNetworkAccessManager>
 #include <qqmlintegration.h>
@@ -12,7 +12,7 @@ class SpotifyApi: public QObject
 	QML_ELEMENT
 
 	Q_PROPERTY(bool authenticated READ getAuthenticated NOTIFY authenticatedChanged)
-	Q_PROPERTY(CurrentlyPlaying currentlyPlaying READ getCurrentlyPlaying NOTIFY currentlyPlayingChanged)
+	Q_PROPERTY(PlaybackState state READ getState NOTIFY stateChanged)
 
 public:
 	explicit SpotifyApi(QObject *parent = nullptr);
@@ -23,11 +23,11 @@ public:
 	auto getAuthenticated() const -> bool;
 
 	[[nodiscard]]
-	auto getCurrentlyPlaying() const -> const CurrentlyPlaying &;
+	auto getState() const -> const PlaybackState &;
 
 	Q_INVOKABLE bool tryAuthenticate(const QUrl &url);
 
-	Q_INVOKABLE void fetchCurrentlyPlaying();
+	Q_INVOKABLE void refreshState();
 
 	Q_INVOKABLE void refreshToken();
 
@@ -35,13 +35,13 @@ public:
 
 signals:
 	void authenticatedChanged();
-	void currentlyPlayingChanged();
+	void stateChanged();
 
 private:
 	QSettings *settings;
 	QNetworkAccessManager *http;
 
-	CurrentlyPlaying currentlyPlaying;
+	PlaybackState playbackState;
 
 	[[nodiscard]]
 	auto require(const QString &path) const -> QNetworkRequest;
@@ -57,5 +57,5 @@ private:
 	void authenticate(const QString &code);
 	void authenticate(QNetworkReply *reply);
 
-	void fetchCurrentlyPlaying(QNetworkReply *reply);
+	void refreshState(QNetworkReply *reply);
 };

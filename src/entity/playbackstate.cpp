@@ -1,8 +1,8 @@
-#include "entity/currentlyplaying.hpp"
+#include "entity/playbackstate.hpp"
 
-auto CurrentlyPlaying::fromJson(const QJsonObject &json) -> CurrentlyPlaying
+auto PlaybackState::fromJson(const QJsonObject &json) -> PlaybackState
 {
-	CurrentlyPlaying currentlyPlaying;
+	PlaybackState currentlyPlaying;
 
 	currentlyPlaying.progressMs = json[QStringLiteral("progress_ms")].toInt();
 	currentlyPlaying.timestamp = json[QStringLiteral("timestamp")].toInteger();
@@ -13,17 +13,17 @@ auto CurrentlyPlaying::fromJson(const QJsonObject &json) -> CurrentlyPlaying
 	return currentlyPlaying;
 }
 
-auto CurrentlyPlaying::getItem() const -> const Track &
+auto PlaybackState::getItem() const -> const Track &
 {
 	return item;
 }
 
-auto CurrentlyPlaying::getProgressMs() const -> qint32
+auto PlaybackState::getProgressMs() const -> qint32
 {
 	return progressMs;
 }
 
-auto CurrentlyPlaying::getTimestamp() const -> qint64
+auto PlaybackState::getTimestamp() const -> qint64
 {
 	return timestamp;
 }

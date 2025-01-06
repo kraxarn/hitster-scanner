@@ -5,17 +5,17 @@
 #include <QJsonObject>
 #include <qqmlintegration.h>
 
-class CurrentlyPlaying
+class PlaybackState
 {
 	Q_GADGET
-	QML_VALUE_TYPE(CurrentlyPlaying)
+	QML_VALUE_TYPE(PlaybackState)
 
 	Q_PROPERTY(Track item READ getItem)
 	Q_PROPERTY(qint32 progressMs READ getProgressMs)
 	Q_PROPERTY(qint64 timestamp READ getTimestamp)
 
 public:
-	static auto fromJson(const QJsonObject &json) -> CurrentlyPlaying;
+	static auto fromJson(const QJsonObject &json) -> PlaybackState;
 
 	[[nodiscard]]
 	auto getItem() const -> const Track &;
