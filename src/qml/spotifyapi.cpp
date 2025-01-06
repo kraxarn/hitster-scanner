@@ -1,6 +1,7 @@
 #include "qml/spotifyapi.hpp"
 
 #include <QDesktopServices>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QNetworkAccessManager>
@@ -33,6 +34,7 @@ auto SpotifyApi::require(const QString &path) const -> QNetworkRequest
 	QNetworkRequest request;
 
 	request.setUrl(QUrl(QStringLiteral("https://api.spotify.com/v1/") + path));
+	request.setHeader(QNetworkRequest::ContentTypeHeader, QStringLiteral("application/json"));
 
 	const auto token = QStringLiteral("Bearer %1").arg(getAccessToken());
 	request.setRawHeader(QStringLiteral("Authorization").toUtf8(), token.toUtf8());
@@ -181,9 +183,11 @@ void SpotifyApi::play(const QString &uri) const
 	const auto request = require(QStringLiteral("me/player/play"));
 
 	QJsonObject json;
-	json[QStringLiteral("context_uri")] = uri;
+	json[QStringLiteral("uris")] = QJsonArray{
+		uri
+	};
 
-	auto *reply = http->post(request, QJsonDocument(json).toJson());
+	auto *reply = http->put(request, QJsonDocument(json).toJson(QJsonDocument::Compact));
 	connect(reply, &QNetworkReply::finished, [reply]
 	{
 		reply->deleteLater();
