@@ -24,6 +24,11 @@ namespace
 
 auto main(int argc, char *argv[]) -> int
 {
+#ifdef Q_OS_ANDROID
+	// Workaround for https://bugreports.qt.io/browse/QTBUG-82617
+	qputenv("QT_ANDROID_NO_EXIT_CALL", "1");
+#endif
+
 	QCoreApplication::setApplicationName(QStringLiteral(APP_NAME));
 	QCoreApplication::setApplicationVersion(QStringLiteral(APP_VERSION));
 	QCoreApplication::setOrganizationName(QStringLiteral(ORG_NAME));
