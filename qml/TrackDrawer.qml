@@ -25,61 +25,66 @@ Drawer {
 		id: scrambler
 	}
 
-	RowLayout {
+	ColumnLayout {
 		anchors.fill: parent
 
-		Image {
-			id: album
-			source: albumUrl
-			fillMode: Image.PreserveAspectFit
-			asynchronous: true
-			smooth: !scrambled
-
-			sourceSize {
-				width: scrambled ? 8 : 300
-				height: scrambled ? 8 : 300
-			}
-
-			Layout.preferredWidth: 150
-			Layout.preferredHeight: 150
-			Layout.leftMargin: 32
-			Layout.bottomMargin: 32
-			Layout.topMargin: 16
-		}
-
-		ColumnLayout {
-			spacing: 0
-
+		RowLayout {
 			Layout.fillWidth: true
-			Layout.leftMargin: 16
 
-			Label {
-				text: scrambled ? scrambler.scramble(trackName) : trackName
-				font.pointSize: 18
-			}
+			Image {
+				id: album
+				source: albumUrl
+				fillMode: Image.PreserveAspectFit
+				asynchronous: true
+				smooth: !scrambled
 
-			Label {
-				text: scrambled ? scrambler.scramble(artistName) : artistName
-				font.pointSize: 16
-			}
+				sourceSize {
+					width: scrambled ? 8 : 300
+					height: scrambled ? 8 : 300
+				}
 
-			ProgressBar {
-				value: trackProgress
-				to: trackDuration
-
+				Layout.preferredWidth: 150
+				Layout.preferredHeight: 150
+				Layout.leftMargin: 32
 				Layout.topMargin: 16
-				Layout.rightMargin: 16
+			}
+
+			ColumnLayout {
+				spacing: 0
+
 				Layout.fillWidth: true
+				Layout.leftMargin: 16
+
+				Label {
+					text: scrambled ? scrambler.scramble(trackName) : trackName
+					font.pointSize: 18
+				}
+
+				Label {
+					text: scrambled ? scrambler.scramble(artistName) : artistName
+					font.pointSize: 16
+				}
+
+				ProgressBar {
+					value: trackProgress
+					to: trackDuration
+
+					Layout.topMargin: 16
+					Layout.rightMargin: 32
+					Layout.fillWidth: true
+				}
 			}
 		}
 
 		Button {
-			flat: true
 			icon.source: `qrc:/res/icon/${scrambled ? "eye-off" : "eye"}.svg`
+			text: scrambled ? "Reveal" : "Hide"
+
 			onPressed: scrambled = false
 			onReleased: scrambled = true
 
-			Layout.rightMargin: 16
+			Layout.fillWidth: true
+			Layout.margins: 32
 		}
 	}
 }
