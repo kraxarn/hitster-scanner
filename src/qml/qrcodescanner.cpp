@@ -34,6 +34,11 @@ void QrCodeScanner::scan() const
 	const auto &frame = sink->videoFrame();
 	auto image = frame.toImage();
 
+	if (image.isNull())
+	{
+		return;
+	}
+
 	// Based on:
 	// https://invent.kde.org/frameworks/prison/-/blob/master/src/scanner/imagescanner.cpp
 
