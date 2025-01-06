@@ -4,6 +4,7 @@
 #include <QQmlContext>
 #include <QtWebView>
 
+#include "model/devicelistmodel.hpp"
 #include "qml/htmlinfo.hpp"
 #include "qml/permissionmanager.hpp"
 #include "qml/qrcodescanner.hpp"
@@ -19,6 +20,7 @@ namespace
 		qmlRegisterType<QrCodeScanner>("QrCodeScanner", 1, 0, "QrCodeScanner");
 		qmlRegisterType<SpotifyApi>("SpotifyApi", 1, 0, "SpotifyApi");
 		qmlRegisterType<WordScrambler>("WordScrambler", 1, 0, "WordScrambler");
+		qmlRegisterType<DeviceListModel>("DeviceListModel", 1, 0, "DeviceListModel");
 	}
 }
 

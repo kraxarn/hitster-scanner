@@ -25,6 +25,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 	# QML requires headers in root
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/qml"
 	"${CMAKE_CURRENT_SOURCE_DIR}/src/entity"
+	"${CMAKE_CURRENT_SOURCE_DIR}/src/model"
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE APP_NAME="${PROJECT_NAME}")

@@ -16,10 +16,10 @@ public:
 	static auto fromJson(const QJsonObject &json) -> Device;
 
 	[[nodiscard]]
-	auto getId() -> const QString &;
+	auto getId() const -> const QString &;
 
 	[[nodiscard]]
-	auto getName() -> const QString &;
+	auto getName() const -> const QString &;
 
 private:
 	QString id;

@@ -67,6 +67,9 @@ ColumnLayout {
 		Layout.fillWidth: true
 		Layout.margins: 16
 
+		DeviceButton {
+		}
+
 		Item {
 			Layout.fillWidth: true
 		}

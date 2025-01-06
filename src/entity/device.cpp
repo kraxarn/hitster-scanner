@@ -10,12 +10,12 @@ auto Device::fromJson(const QJsonObject &json) -> Device
 	return device;
 }
 
-auto Device::getId() -> const QString &
+auto Device::getId() const -> const QString &
 {
 	return id;
 }
 
-auto Device::getName() -> const QString &
+auto Device::getName() const -> const QString &
 {
 	return name;
 }

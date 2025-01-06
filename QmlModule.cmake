@@ -16,6 +16,7 @@ qt_add_qml_module(${PROJECT_NAME}
 	qml/LoginPage.qml
 	qml/AuthPage.qml
 	qml/TrackDrawer.qml
+	qml/DeviceButton.qml
 	RESOURCES
 	res/font/regular.ttf
 	res/font/bold.ttf
