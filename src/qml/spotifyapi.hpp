@@ -1,5 +1,6 @@
 #pragma once
 
+#include "entity/device.hpp"
 #include "entity/playbackstate.hpp"
 
 #include <QNetworkAccessManager>
@@ -33,9 +34,12 @@ public:
 
 	Q_INVOKABLE void play(const QString &uri) const;
 
+	Q_INVOKABLE void fetchDevices();
+
 signals:
 	void authenticatedChanged();
 	void stateChanged();
+	void devicesFetched(const QList<Device> &devices);
 
 private:
 	QSettings *settings;
@@ -58,4 +62,5 @@ private:
 	void authenticate(QNetworkReply *reply);
 
 	void refreshState(QNetworkReply *reply);
+	void fetchDevices(QNetworkReply *reply);
 };

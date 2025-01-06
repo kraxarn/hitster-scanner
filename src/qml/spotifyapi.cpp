@@ -193,3 +193,31 @@ void SpotifyApi::play(const QString &uri) const
 		reply->deleteLater();
 	});
 }
+
+void SpotifyApi::fetchDevices()
+{
+	const auto request = require(QStringLiteral("me/player/devices"));
+
+	auto *reply = http->get(request);
+	connect(reply, &QNetworkReply::finished, [this, reply]
+	{
+		fetchDevices(reply);
+	});
+}
+
+void SpotifyApi::fetchDevices(QNetworkReply *reply)
+{
+	const auto json = QJsonDocument::fromJson(reply->readAll());
+	const auto array = json[QStringLiteral("devices")].toArray();
+
+	QList<Device> devices;
+	devices.reserve(array.size());
+
+	for (const auto &item: array)
+	{
+		devices.append(Device::fromJson(item.toObject()));
+	}
+
+	emit devicesFetched(devices);
+	reply->deleteLater();
+}
