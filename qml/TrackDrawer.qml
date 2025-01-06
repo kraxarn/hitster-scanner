@@ -72,7 +72,8 @@ Drawer {
 		Button {
 			flat: true
 			icon.source: `qrc:/res/icon/${scrambled ? "eye-off" : "eye"}.svg`
-			onClicked: scrambled = !scrambled
+			onPressed: scrambled = false
+			onReleased: scrambled = true
 
 			Layout.rightMargin: 16
 		}
