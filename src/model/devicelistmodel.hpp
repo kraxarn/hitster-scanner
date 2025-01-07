@@ -32,9 +32,13 @@ private:
 	void clearDevices();
 	void addDevices(const QList<Device> &devices);
 
+	[[nodiscard]]
+	static auto getDeviceIcon(const QString &type) -> QString;
+
 	enum class ItemRole: int
 	{
 		DeviceId = Qt::UserRole + 1,
 		DeviceName,
+		DeviceIcon,
 	};
 };

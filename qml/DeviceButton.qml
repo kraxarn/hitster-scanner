@@ -55,7 +55,7 @@ Button {
 						Icon {
 							width: 64
 							height: 64
-							source: "qrc:/res/icon/speaker.svg"
+							source: model.icon || "qrc:/res/icon/speaker.svg"
 
 							Layout.fillHeight: true
 						}

@@ -25,6 +25,10 @@ auto DeviceListModel::data(const QModelIndex &index, int role) const -> QVariant
 		case ItemRole::DeviceName:
 			return device.getName();
 
+		case ItemRole::DeviceIcon:
+			return QString("qrc:/res/icon/%1.svg")
+				.arg(getDeviceIcon(device.getType()));
+
 		default:
 			return {};
 	}
@@ -35,6 +39,7 @@ auto DeviceListModel::roleNames() const -> QHash<int, QByteArray>
 	return {
 		{static_cast<int>(ItemRole::DeviceId), "id"},
 		{static_cast<int>(ItemRole::DeviceName), "name"},
+		{static_cast<int>(ItemRole::DeviceIcon), "icon"},
 	};
 }
 
@@ -66,4 +71,25 @@ void DeviceListModel::addDevices(const QList<Device> &devices)
 	this->devices.append(devices);
 
 	endInsertRows();
+}
+
+auto DeviceListModel::getDeviceIcon(const QString &type) -> QString
+{
+	if (type == QStringLiteral("Computer"))
+	{
+		return QStringLiteral("laptop");
+	}
+
+	if (type == QStringLiteral("Tablet")
+		|| type == QStringLiteral("Smartphone"))
+	{
+		return QStringLiteral("cellphone");
+	}
+
+	if (type == QStringLiteral("TV"))
+	{
+		return QStringLiteral("television");
+	}
+
+	return QStringLiteral("speaker");
 }
