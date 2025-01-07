@@ -5,6 +5,7 @@ import QtQuick.Controls.Material
 import QtMultimedia
 
 import QrCodeScanner
+import SpotifyApi
 
 ColumnLayout {
 	ToolBar {
@@ -68,6 +69,7 @@ ColumnLayout {
 		Layout.margins: 16
 
 		DeviceButton {
+			id: deviceButton
 			device: api.state.device
 		}
 
@@ -91,6 +93,15 @@ ColumnLayout {
 
 		Item {
 			Layout.fillWidth: true
+		}
+	}
+
+	SpotifyApi {
+		id: api
+		onStateChanged: {
+			if (!api.state.device.id) {
+				deviceButton.open()
+			}
 		}
 	}
 

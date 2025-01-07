@@ -9,13 +9,14 @@ Button {
 	flat: true
 	icon.source: `qrc:/res/icon/${device ? deviceModel.getDeviceIcon(device.type) : "speaker"}.svg`
 	text: (device ? device.name : undefined) || ("<i>" + qsTr("(no device)") + "</i>")
+	onClicked: open()
 
-	onClicked: {
+	property var device
+
+	function open() {
 		deviceModel.loadItems()
 		drawer.open()
 	}
-
-	property var device
 
 	Drawer {
 		id: drawer
