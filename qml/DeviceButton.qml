@@ -8,7 +8,7 @@ import DeviceListModel
 Button {
 	flat: true
 	icon.source: `qrc:/res/icon/${device ? deviceModel.getDeviceIcon(device.type) : "speaker"}.svg`
-	text: (device ? device.name : undefined) || qsTr("<i>(no device)</i>")
+	text: (device ? device.name : undefined) || `<i>${qsTr("(no device)")}</i>`
 
 	onClicked: {
 		deviceModel.loadItems()
