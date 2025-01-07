@@ -10,6 +10,7 @@ class Device
 
 	Q_PROPERTY(QString id READ getId)
 	Q_PROPERTY(QString name READ getName)
+	Q_PROPERTY(QString type READ getType)
 
 public:
 	[[nodiscard]]
@@ -21,7 +22,11 @@ public:
 	[[nodiscard]]
 	auto getName() const -> const QString &;
 
+	[[nodiscard]]
+	auto getType() const -> const QString &;
+
 private:
 	QString id;
 	QString name;
+	QString type;
 };
