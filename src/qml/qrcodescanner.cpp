@@ -83,7 +83,7 @@ void QrCodeScanner::scan()
 		case QImage::Format_RGB32:
 		case QImage::Format_ARGB32:
 		case QImage::Format_ARGB32_Premultiplied:
-			imageFormat = ZXing::ImageFormat::XRGB;
+			imageFormat = ZXing::ImageFormat::ARGB;
 			break;
 
 		case QImage::Format_RGB888:
@@ -93,7 +93,7 @@ void QrCodeScanner::scan()
 		case QImage::Format_RGBX8888:
 		case QImage::Format_RGBA8888:
 		case QImage::Format_RGBA8888_Premultiplied:
-			imageFormat = ZXing::ImageFormat::RGBX;
+			imageFormat = ZXing::ImageFormat::RGBA;
 			break;
 
 		case QImage::Format_Grayscale8:
