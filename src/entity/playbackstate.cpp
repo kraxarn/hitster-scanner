@@ -30,3 +30,8 @@ auto PlaybackState::getTimestamp() const -> qint64
 {
 	return timestamp;
 }
+
+auto PlaybackState::getDevice() const -> const Device &
+{
+	return device;
+}
