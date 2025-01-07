@@ -45,7 +45,10 @@ Button {
 				delegate: ItemDelegate {
 					id: row
 					width: deviceList.width
-					onClicked: console.log(model.id)
+					onClicked: {
+						api.transfer(model.id)
+						drawer.close()
+					}
 
 					required property var model
 

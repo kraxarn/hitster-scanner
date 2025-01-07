@@ -36,6 +36,8 @@ public:
 
 	Q_INVOKABLE void fetchDevices();
 
+	Q_INVOKABLE void transfer(const QString &deviceId) const;
+
 signals:
 	void authenticatedChanged();
 	void stateChanged();

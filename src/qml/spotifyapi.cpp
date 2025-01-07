@@ -221,3 +221,19 @@ void SpotifyApi::fetchDevices(QNetworkReply *reply)
 	emit devicesFetched(devices);
 	reply->deleteLater();
 }
+
+void SpotifyApi::transfer(const QString &deviceId) const
+{
+	const auto request = require(QStringLiteral("me/player"));
+
+	QJsonObject json;
+	json[QStringLiteral("device_ids")] = QJsonArray{
+		deviceId,
+	};
+
+	auto *reply = http->put(request, QJsonDocument(json).toJson(QJsonDocument::Compact));
+	connect(reply, &QNetworkReply::finished, [reply]
+	{
+		reply->deleteLater();
+	});
+}
