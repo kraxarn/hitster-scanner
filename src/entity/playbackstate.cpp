@@ -10,6 +10,9 @@ auto PlaybackState::fromJson(const QJsonObject &json) -> PlaybackState
 	const auto item = json[QStringLiteral("item")].toObject();
 	currentlyPlaying.item = Track::fromJson(item);
 
+	const auto device = json[QStringLiteral("device")].toObject();
+	currentlyPlaying.device = Device::fromJson(device);
+
 	return currentlyPlaying;
 }
 
