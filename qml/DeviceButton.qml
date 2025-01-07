@@ -7,14 +7,15 @@ import DeviceListModel
 
 Button {
 	flat: true
-	icon.source: "qrc:/res/icon/speaker.svg"
-	text: deviceName || qsTr("<i>(no device)</i>")
+	icon.source: `qrc:/res/icon/${device ? deviceModel.getDeviceIcon(device.type) : "speaker"}.svg`
+	text: (device ? device.name : undefined) || qsTr("<i>(no device)</i>")
+
 	onClicked: {
 		deviceModel.loadItems()
 		drawer.open()
 	}
 
-	property string deviceName
+	property var device
 
 	Drawer {
 		id: drawer
@@ -58,7 +59,7 @@ Button {
 						Icon {
 							width: 64
 							height: 64
-							source: model.icon || "qrc:/res/icon/speaker.svg"
+							source: model.icon
 
 							Layout.fillHeight: true
 						}

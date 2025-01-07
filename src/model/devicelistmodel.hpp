@@ -25,15 +25,15 @@ public:
 
 	Q_INVOKABLE void loadItems() const;
 
+	[[nodiscard]]
+	Q_INVOKABLE static QString getDeviceIcon(const QString &type);
+
 private:
 	QList<Device> devices;
 	SpotifyApi *api;
 
 	void clearDevices();
 	void addDevices(const QList<Device> &devices);
-
-	[[nodiscard]]
-	static auto getDeviceIcon(const QString &type) -> QString;
 
 	enum class ItemRole: int
 	{

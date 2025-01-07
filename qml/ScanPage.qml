@@ -68,6 +68,7 @@ ColumnLayout {
 		Layout.margins: 16
 
 		DeviceButton {
+			device: api.state.device
 		}
 
 		Item {
@@ -95,7 +96,7 @@ ColumnLayout {
 
 	Timer {
 		interval: 1000
-		running: trackDrawer.opened
+		running: true
 		repeat: true
 		onTriggered: api.refreshState()
 	}
